@@ -42,7 +42,7 @@ function runGameOver(deltaTime)
     
 }
 
-
+/*
 var Player = function() 
 {
 	image = document.createElement("img");
@@ -64,7 +64,7 @@ var Player = function()
 
     shootTimer = 0;
 }
-
+*/
 var grass = document.createElement("img");
 grass.src = "grass.png";
 
@@ -110,7 +110,7 @@ function playerShoot()
     bullet.image.src = "bullet.png";
  
     var velX = 0;
-    var velY = -1;
+    var velY = 1;
     var s = Math.sin(player.rotation);
     var c = Math.cos(player.rotation);
     var xVel = (velX * c) - (velY * s);
@@ -379,7 +379,7 @@ function run() {
 
     for (var i = 0; i < bullets.length; i++) {
         bullets[i].x += bullets[i].velocityX;
-        bullets[i].Y += bullets[i].velocityY;
+        bullets[i].y += bullets[i].velocityY;
     }
 
     for (var i = 0; i < bullets.length; i++) {
