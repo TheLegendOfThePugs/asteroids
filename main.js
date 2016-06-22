@@ -170,7 +170,7 @@ var spawnTimer = 0;
 var speed = 0;
 
  
- 
+var test = -0;
 
 function getDeltaTime()
 {
