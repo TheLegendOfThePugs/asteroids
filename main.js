@@ -32,15 +32,6 @@ function runSPLASH(deltaTime)
     context.fillText("SPLASH SCREEN!!!!", 200, 240);
 }
 
-function runGame(deltaTime)
-{
-    
-}
-
-function runGameOver(deltaTime)
-{
-    
-}
 
 /*
 var Player = function() 
@@ -302,27 +293,10 @@ function onKeyUp(event)
            // playerShoot();
       }*/}
 
-function run() {
-    context.fillStyle = "#111";
+function runGame(deltaTime)
+{
+    context.fillStyle = "#011";
     context.fillRect(0, 0, canvas.width, canvas.height);
-
-
-
-
-    var deltaTime = getDeltaTime();
-
-    switch (gameState) {
-        case STATE_SPLASH:
-            runSPLASH(deltaTime)
-            break;
-        case STATE_GAME:
-            runGame(deltaTime)
-            break;
-        case STATE_GAMEOVER:
-            runGameOver(deltaTime)
-            break;
-
-    }
 
     for (var y = 0; y < 105; y++) {
         for (var x = 0; x < 70; x++) {
@@ -337,6 +311,7 @@ function run() {
             player.x - player.width / 2, player.y - player.height / 2,
             player.width, player.height) == true) {
             gameover = true;
+            runGameOver(deltaTime);
             break;
         }
     }
@@ -409,17 +384,13 @@ function run() {
         player.y < 0 || player.y > SCREEN_HEIGHT)//|| hit == true)
     {
         //console.log("hit")
-        gameover = true
+        gameover = true;
+        //runGameOver(deltaTime);
     }
 
 
 
-    if (gameover == true) {
-        context.fillStyle = "#000";
-        context.font = "240px Arial";
-        context.fillText("game over!", 400, 240);
-    }
-
+    
 
     //}
 
@@ -476,14 +447,14 @@ function run() {
         asteroids[i].y = asteroids[i].y + asteroids[i].velocityY;
 
     }
-
+    if(gameover == false){
     for (var i = 0; i < asteroids.length; i++) {
         context.drawImage(asteroids[i].image, asteroids[i].x, asteroids[i].y);
-    }
+    }}
 
     spawnTimer -= deltaTime;
 
-    if (spawnTimer <= 0) {
+    if (spawnTimer <= 0 && gameover == false) {
         spawnTimer = 1;
         spawnAsteroid();
     }
@@ -532,9 +503,41 @@ function run() {
         context.stroke();
     }
       */
-    context.fillStyle = "#000";
-    context.font = "40px Arial";
-    context.fillText(gameover + "         space to use invisible heat seeking bullets!!!!", 200, 240);
+}
+
+function runGameOver(deltaTime)
+    {
+        context.fillStyle = "#000";
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.fillStyle = "#ffffff";
+        context.font="32px Arial";
+        context.fillText("YOU HAVE DIED!!!", 450, 350);
+}
+
+
+function run() {
+    context.fillStyle = "#111";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+
+
+
+    var deltaTime = getDeltaTime();
+
+    switch (gameState) {
+        case STATE_SPLASH:
+            runSPLASH(deltaTime)
+            break;
+        case STATE_GAME:
+            runGame(deltaTime)
+            break;
+        case STATE_GAMEOVER:
+            runGameOver(deltaTime)
+            break;
+
+    }
+
+    
 }
 
  (function() {
