@@ -312,7 +312,7 @@ function runGame(deltaTime)
             player.width, player.height) == true) {
             gameover = true;
             runGameOver(deltaTime);
-            break;
+            
         }
     }
     if (this.shootTimer > 0) {
@@ -385,7 +385,7 @@ function runGame(deltaTime)
     {
         //console.log("hit")
         gameover = true;
-        //runGameOver(deltaTime);
+        runGameOver(deltaTime);
     }
 
 
@@ -409,13 +409,14 @@ function runGame(deltaTime)
     player.rotation += player.angularDirection * PLAYER_TURN_SPEED;
 
     //context.drawImage(player, x, y);
-
+    if(gameover == false)
+    {
     context.save();
     context.translate(player.x, player.y);
     context.rotate(player.rotation);
     context.drawImage(
         player.image, -player.width / 2, -player.height / 2);
-    context.restore();
+    context.restore();}
     /*
     var velocityX = asteroid.directionX * ASTROID_SPEED;
     var velocityY = asteroid.directionY * ASTROID_SPEED;
@@ -520,7 +521,10 @@ function run() {
     context.fillRect(0, 0, canvas.width, canvas.height);
 
 
-
+    if(gameover == true)
+    {
+        runGameOver(deltaTime);
+    }
 
     var deltaTime = getDeltaTime();
 
